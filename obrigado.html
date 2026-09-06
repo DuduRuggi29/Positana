@@ -39,7 +39,7 @@
         .qr-code { width: 170px; height: 170px; margin: 0 auto 10px; }
         .qr-code img { width: 100%; }
         .copy-box { background: white; border: 1px solid #eee; padding: 8px; border-radius: 8px; font-size: 11px; word-break: break-all; margin-bottom: 8px; color: #333; }
-        .btn-copy { background: #1a1a1a; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; font-size: 14px; }
+        .btn-copy { background: #1a1a1a; color: white; border: none; padding: 18px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; font-family: 'Inter', sans-serif; font-size: 18px; }
         .btn-copy:active { opacity: 0.85; }
 
         .urgency-banner {
@@ -64,11 +64,11 @@
         .mp-seal img { height: 44px; vertical-align: middle; }
 
         .pix-expired-msg {
-            display: none; background: #fff1f1; border: 1.5px solid #ef4444;
+            display: none; background: #f9e8f0; border: 1.5px solid #7a3050;
             border-radius: 10px; padding: 12px; margin-bottom: 10px; text-align: center;
         }
-        .pix-expired-msg p { color: #dc2626; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
-        .pix-expired-msg span { font-size: 11px; color: #7f1d1d; }
+        .pix-expired-msg p { color: #7a3050; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+        .pix-expired-msg span { font-size: 11px; color: #7a3050; }
 
         .btn-home { display: block; text-decoration: none; color: #7a3050; font-weight: 700; border: 1px solid #7a3050; padding: 10px; border-radius: 8px; transition: 0.2s; font-size: 13px; }
         .btn-home:hover { background: #fdf0f5; }
@@ -86,7 +86,7 @@
 
         <div class="urgency-banner" id="urgency-banner">
             <span class="urgency-label">⚠️ Pague agora — código expirando</span>
-            <div class="countdown-display" id="countdown-display">10:00</div>
+            <div class="countdown-display" id="countdown-display">30:00</div>
             <span class="urgency-msg" id="urgency-msg">Finalize seu pagamento antes que o código Pix expire!</span>
         </div>
 
@@ -96,8 +96,8 @@
         </div>
 
         <div class="pix-expired-msg" id="pix-expired-msg">
-            <p>⛔ Seu código Pix expirou!</p>
-            <span>Volte à loja e gere um novo Pix para concluir sua compra.</span>
+            <p>✅ Seu código Pix continua válido!</p>
+            <span>Pode finalizar o pagamento normalmente, copiando o código ou escaneando o QR Code abaixo.</span>
         </div>
 
         <div class="pix-container">
@@ -162,7 +162,7 @@ if (type === 'pix' && status === 'pending') {
 }
 
 function startCountdown() {
-    let seconds = 600;
+    let seconds = 1800;
     const display    = document.getElementById('countdown-display');
     const banner     = document.getElementById('urgency-banner');
     const msg        = document.getElementById('urgency-msg');
@@ -181,8 +181,8 @@ function startCountdown() {
             clearInterval(tick);
             banner.style.display = 'none';
             expiredMsg.style.display = 'block';
-            const container = document.querySelector('.pix-container');
-            if (container) { container.style.opacity = '0.4'; container.style.pointerEvents = 'none'; }
+            // O código Pix continua válido por 24h no Mercado Pago mesmo depois
+            // desse cronômetro - por isso não escondemos nem travamos o botão aqui.
         }
     }, 1000);
 }
