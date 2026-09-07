@@ -13,8 +13,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Finalizar Compra — Julia &amp; Julie Lingerie</title>
+    <!-- TikTok Pixel Code Start -->
+    <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+      ttq.load('DAF3HFRC77U98E0ULF3G');
+      ttq.page();
+    }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
     <!-- Meta Pixel Code -->
-    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','3832792887031077');fbq('track','PageView');(function(){if(sessionStorage.getItem('jj_ic_fired'))return;sessionStorage.setItem('jj_ic_fired','1');const p=new URLSearchParams(window.location.search);const prices={'SUT-T1':69.90,'SUT-T2':98.90,'SUT-T3':117.90};const promo=p.get('promo')||'SUT-T3';const qty=parseInt(p.get('qty')||'1');const val=Math.round((prices[promo]||117.90)*qty*100)/100;fbq('track','InitiateCheckout',{content_name:'Sutiã Hanna 3.0',content_ids:['sutia-hanna-30'],content_type:'product',value:val,currency:'BRL',num_items:qty});if(typeof gtag!=='undefined'){gtag('event','conversion',{'send_to':'AW-18403187809/YtQCCLyFjOccEOG4qcdE','value':val,'currency':'BRL'});}})();</script>
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','3832792887031077');fbq('track','PageView');(function(){if(sessionStorage.getItem('jj_ic_fired'))return;sessionStorage.setItem('jj_ic_fired','1');const p=new URLSearchParams(window.location.search);const prices={'SUT-T1':69.90,'SUT-T2':98.90,'SUT-T3':117.90};const promo=p.get('promo')||'SUT-T3';const qty=parseInt(p.get('qty')||'1');const val=Math.round((prices[promo]||117.90)*qty*100)/100;fbq('track','InitiateCheckout',{content_name:'Sutiã Hanna 3.0',content_ids:['sutia-hanna-30'],content_type:'product',value:val,currency:'BRL',num_items:qty});if(typeof gtag!=='undefined'){gtag('event','conversion',{'send_to':'AW-18403187809/YtQCCLyFjOccEOG4qcdE','value':val,'currency':'BRL'});}if(typeof ttq!=='undefined'){ttq.track('InitiateCheckout',{content_type:'product',content_id:'sutia-hanna-30',quantity:qty,value:val,currency:'BRL'});}})();</script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3832792887031077&ev=PageView&noscript=1"/></noscript>
     <!-- End Meta Pixel Code -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
@@ -1061,6 +1074,14 @@
                         'currency': 'BRL'
                     });
                 }
+                if (typeof ttq !== 'undefined') {
+                    ttq.track('AddPaymentInfo', {
+                        content_type: 'product',
+                        content_id: 'sutia-hanna-30',
+                        value: _val,
+                        currency: 'BRL'
+                    });
+                }
             }
         }
     }
@@ -1221,6 +1242,14 @@
                             'value': totalPrice,
                             'currency': 'BRL',
                             'transaction_id': result.id || ''
+                        });
+                    }
+                    if (typeof ttq !== 'undefined') {
+                        ttq.track('CompletePayment', {
+                            content_type: 'product',
+                            content_id: 'sutia-hanna-30',
+                            value: totalPrice,
+                            currency: 'BRL'
                         });
                     }
                 }
