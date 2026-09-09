@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Poppins:wght@300;400;500;600;700&display=swap');
 
         :root {
-            --rosa-principal: #E8A4A0;
-            --rosa-claro: #F2C4C0;
-            --rosa-escuro: #C97E7A;
+            --rosa-principal: #7C5365;
+            --rosa-claro: #F2C0D6;
+            --rosa-escuro: #C97A9C;
             --branco-fundo: #F7F5F4;
             --cinza-claro: #EFEFED;
             --cinza-medio: #D8D5D3;
@@ -253,27 +253,27 @@
 
         .size-chart-link {
             display: inline-flex; align-items: center; gap: 7px;
-            color: #7a5c5c; font-size: 13px; font-weight: 600;
+            color: #7A5C69; font-size: 13px; font-weight: 600;
             text-decoration: none; margin-top: 8px;
-            background: #f9f1f1; border: 1.5px solid #e0c4c4;
+            background: #F9F1F4; border: 1.5px solid #E0C4D0;
             padding: 7px 14px; border-radius: 8px;
             transition: background 0.2s, border-color 0.2s;
         }
-        .size-chart-link:hover { background: #f3e4e4; border-color: #c9908f; }
-        .size-chart-link svg { color: #c97b9a; }
+        .size-chart-link:hover { background: #F3E4EB; border-color: #C98FA8; }
+        .size-chart-link svg { color: #C97B9D; }
 
         /* Urgency bar */
         .urgency-bar {
             display: flex; align-items: center; justify-content: center;
             background: #ffffff;
-            border: 1.5px solid #f0a0b0;
+            border: 1.5px solid #F0A0C3;
             border-radius: 50px; padding: 11px 20px;
             margin: 14px 0 0; font-size: 13px; font-weight: 700;
-            color: #c0456a; letter-spacing: 0.3px; text-transform: uppercase;
+            color: #C0457B; letter-spacing: 0.3px; text-transform: uppercase;
         }
         .urgency-dot {
             width: 9px; height: 9px; border-radius: 50%;
-            background: #e0547a; flex-shrink: 0;
+            background: #E05491; flex-shrink: 0;
             animation: pulseDot 1.2s ease-in-out infinite;
         }
         .urgency-fire { font-size: 15px; animation: pulseEmoji 1.2s ease-in-out infinite; }
@@ -302,12 +302,12 @@
         /* Kit qty selector */
         .kit-qty-row { display: flex; align-items: center; gap: 10px; margin: 8px 0 4px; }
         .kit-qty-btn {
-            width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #d4a0a0;
-            background: #fff; color: #b06060; font-size: 18px; font-weight: 600;
+            width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #D4A0B7;
+            background: #fff; color: #B06083; font-size: 18px; font-weight: 600;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
             line-height: 1; transition: background 0.15s;
         }
-        .kit-qty-btn:hover { background: #f9ecec; }
+        .kit-qty-btn:hover { background: #F9ECF2; }
         .kit-qty-val { font-size: 18px; font-weight: 700; min-width: 20px; text-align: center; color: #222; }
         .kit-qty-label { font-size: 13px; color: #777; }
         
@@ -318,7 +318,7 @@
             width: 100%; box-sizing: border-box;
             background: #fff;
         }
-        .bundle-card.active { border: 2px solid var(--rosa-escuro); background: rgba(232, 164, 160, 0.05); }
+        .bundle-card.active { border: 2px solid var(--rosa-escuro); background: rgba(124, 83, 101, 0.05); }
         
         .bundle-radio { position: relative; width: 22px; height: 22px; flex-shrink: 0; margin-top: 4px; }
         .bundle-radio input { opacity: 0; position: absolute; }
@@ -489,7 +489,7 @@
         .guarantee-section { background: var(--branco-puro); padding: 40px 16px; }
         @media (min-width: 480px) { .guarantee-section { padding: 40px 24px; } }
         .guarantee-box {
-            max-width: 700px; margin: 0 auto; background: rgba(242, 196, 192, 0.4);
+            max-width: 700px; margin: 0 auto; background: rgba(242, 192, 214, 0.4);
             border: 1px solid var(--rosa-principal); border-radius: 24px; padding: 40px 24px;
             text-align: center;
         }
