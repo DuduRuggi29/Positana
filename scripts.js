@@ -79,3 +79,26 @@
 
             elements.forEach(el => observer.observe(el));
         });
+
+        // Lazy-load vídeos: só busca o arquivo e dá play quando o vídeo
+        // está perto da viewport, em vez de todos competirem por banda
+        // já no carregamento inicial da página.
+        document.addEventListener("DOMContentLoaded", () => {
+            const lazyVideos = document.querySelectorAll('video[data-src]');
+            if (!lazyVideos.length) return;
+
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const video = entry.target;
+                        video.src = video.dataset.src;
+                        video.removeAttribute('data-src');
+                        video.load();
+                        video.play().catch(() => {});
+                        videoObserver.unobserve(video);
+                    }
+                });
+            }, { rootMargin: '300px 0px' });
+
+            lazyVideos.forEach(v => videoObserver.observe(v));
+        });
