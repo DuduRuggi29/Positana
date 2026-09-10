@@ -1,5 +1,5 @@
 // Mercado Pago Public Key
-const MP_PUBLIC_KEY = 'APP_USR-6c22f4a9-4e65-4763-aea1-d99069d0d86f';
+const MP_PUBLIC_KEY = 'APP_USR-79a4de34-da24-451b-b8ea-ac141b962ec9';
 
 // Order data from URL
 const params      = new URLSearchParams(window.location.search);
