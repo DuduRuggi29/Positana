@@ -1,14 +1,56 @@
 
-const MP_ACCESS_TOKEN = process.env.MP_ACCESS_TOKEN;
-const SUPABASE_URL    = process.env.SUPABASE_URL;
-const SUPABASE_KEY    = process.env.SUPABASE_SERVICE_KEY;
+const crypto = require('crypto');
+
+const MP_ACCESS_TOKEN   = process.env.MP_ACCESS_TOKEN;
+const MP_WEBHOOK_SECRET = process.env.MP_WEBHOOK_SECRET;
+const SUPABASE_URL      = process.env.SUPABASE_URL;
+const SUPABASE_KEY      = process.env.SUPABASE_SERVICE_KEY;
 
 const { sendWhatsAppConfirmation, emitBlingNfe } = require('./_shared');
+
+// Confirma que a notificação realmente veio do Mercado Pago, usando a
+// assinatura HMAC-SHA256 enviada no header x-signature. Sem isso,
+// qualquer pessoa poderia forjar um POST pra esse endpoint fingindo
+// que um pedido foi aprovado. Ver: mercadopago.com.br docs de webhooks.
+function isValidSignature(req) {
+    if (!MP_WEBHOOK_SECRET) {
+        console.error('Webhook: MP_WEBHOOK_SECRET não configurado - recusando notificação.');
+        return false;
+    }
+
+    const signatureHeader = req.headers['x-signature'];
+    const requestId = req.headers['x-request-id'];
+    if (!signatureHeader) return false;
+
+    const parts = {};
+    String(signatureHeader).split(',').forEach(kv => {
+        const [k, v] = kv.split('=');
+        if (k && v) parts[k.trim()] = v.trim();
+    });
+    const ts = parts.ts;
+    const v1 = parts.v1;
+    if (!ts || !v1) return false;
+
+    const dataId = String(req.query?.['data.id'] || req.body?.data?.id || '').toLowerCase();
+    const manifest = `id:${dataId};request-id:${requestId || ''};ts:${ts};`;
+    const expected = crypto.createHmac('sha256', MP_WEBHOOK_SECRET).update(manifest).digest('hex');
+
+    try {
+        return crypto.timingSafeEqual(Buffer.from(expected, 'hex'), Buffer.from(v1, 'hex'));
+    } catch {
+        return false;
+    }
+}
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') return res.status(405).end();
 
     try {
+        if (!isValidSignature(req)) {
+            console.error('Webhook: assinatura inválida, notificação recusada.');
+            return res.status(401).json({ error: 'invalid signature' });
+        }
+
         const { type, data } = req.body;
         if (type !== 'payment') return res.status(200).json({ ok: true });
 
