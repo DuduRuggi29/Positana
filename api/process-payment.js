@@ -5,6 +5,32 @@ const SUPABASE_KEY    = process.env.SUPABASE_SERVICE_KEY;
 
 const { sendWhatsAppConfirmation, emitBlingNfe } = require('./_shared');
 
+// Catálogo mínimo usado para enriquecer o item enviado ao Mercado Pago
+// (nome, descrição, SKU e foto corretos por produto, em vez do texto
+// genérico fixo que era usado antes para qualquer checkout).
+const PRODUCTS = {
+    'sutia-hanna': {
+        sku: 'SUTIA-HANNA-30',
+        title: 'Sutiã Hanna 3.0 de Alta Sustentação Sem Aro',
+        description: 'Sutiã sem aro de alta sustentação, tecido premium respirável e alças largas ajustáveis',
+        category_id: 'fashion',
+        picture_path: '/braaa.jpg'
+    },
+    'calcinha-premium': {
+        sku: 'CALCINHA-PREMIUM-ALGODAO',
+        title: 'Calcinha Julie Premium Confort 100% Algodão Antiodor',
+        description: 'Calcinha 95% algodão + 5% elastano, tecido antiodor, vendida em kit com múltiplas unidades',
+        category_id: 'fashion',
+        picture_path: '/cal1.jpg'
+    }
+};
+
+function getClientIp(req) {
+    const fwd = req.headers['x-forwarded-for'];
+    if (fwd) return fwd.split(',')[0].trim();
+    return req.socket?.remoteAddress || undefined;
+}
+
 module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -17,12 +43,15 @@ module.exports = async (req, res) => {
             customerName, customerEmail, customerCpf, customerPhone,
             customerAddress, quantity, promo, totalPrice,
             paymentMethodId, cardToken, cardPaymentMethodId, installments,
-            shippingMethod, shippingPrice, tamanho, cor, deviceId
+            shippingMethod, shippingPrice, tamanho, cor, deviceId, productId
         } = req.body;
+
+        const product = PRODUCTS[productId] || PRODUCTS['sutia-hanna'];
 
         const cpfClean = (customerCpf || '').replace(/\D/g, '');
         const telClean = (customerPhone || '').replace(/\D/g, '');
         const nameParts = (customerName || '').trim().split(' ');
+        const qtyNum = parseInt(quantity) || 1;
 
         const isPix = paymentMethodId === 'pix';
 
@@ -31,9 +60,18 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'Valor inválido: ' + totalPrice });
         }
 
+        const itemSku = [product.sku, tamanho, cor]
+            .filter(Boolean)
+            .map(s => String(s).trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Z0-9]+/g, '-').replace(/^-+|-+$/g, ''))
+            .filter(Boolean)
+            .join('-');
+
+        const clientIp = getClientIp(req);
+        const siteUrl = process.env.SITE_URL || '';
+
         const mpBody = {
             transaction_amount: amount,
-            description: `Julia & Julie - Kit ${promo} (${quantity} un)`,
+            description: `${product.title} - Kit ${promo} (${quantity} un)`,
             statement_descriptor: 'JULIAEJULIE',
             payment_method_id: isPix ? 'pix' : cardPaymentMethodId || 'visa',
             payer: {
@@ -50,12 +88,13 @@ module.exports = async (req, res) => {
             },
             additional_info: {
                 items: [{
-                    id: String(promo),
-                    title: `Kit ${promo} - Sutiã Hanna 3.0`,
-                    description: `Kit ${promo} (${quantity} un), tamanho ${tamanho || 'não informado'}, cor ${cor || 'não informada'}`,
-                    category_id: 'fashion',
-                    quantity: parseInt(quantity) || 1,
-                    unit_price: Math.round((amount / (parseInt(quantity) || 1)) * 100) / 100
+                    id: itemSku,
+                    title: product.title,
+                    description: `${product.description} — Kit ${promo} (${quantity} un), tamanho ${tamanho || 'não informado'}, cor ${cor || 'não informada'}`,
+                    category_id: product.category_id,
+                    quantity: qtyNum,
+                    unit_price: Math.round((amount / qtyNum) * 100) / 100,
+                    picture_url: siteUrl ? `${siteUrl}${product.picture_path}` : undefined
                 }],
                 payer: {
                     first_name: nameParts[0] || customerName,
@@ -66,9 +105,19 @@ module.exports = async (req, res) => {
                         street_name: customerAddress?.street || '',
                         street_number: customerAddress?.number || 'S/N'
                     }
-                }
+                },
+                shipments: {
+                    receiver_address: {
+                        zip_code: (customerAddress?.cep || '').replace(/\D/g, ''),
+                        street_name: customerAddress?.street || '',
+                        street_number: customerAddress?.number || 'S/N',
+                        city_name: customerAddress?.city || '',
+                        state_name: customerAddress?.state || ''
+                    }
+                },
+                ip_address: clientIp
             },
-            notification_url: `${process.env.SITE_URL}/api/webhook`,
+            notification_url: `${siteUrl}/api/webhook`,
             external_reference: `jj-${Date.now()}`
         };
 
@@ -115,7 +164,7 @@ module.exports = async (req, res) => {
             prazo_frete: '',
             custo_frete: parseFloat(shippingPrice) || 0,
             kit: promo,
-            nome_kit: `Kit ${promo}`,
+            nome_kit: `${product.title} - Kit ${promo}`,
             quantidade: parseInt(quantity) || 1,
             tamanho: tamanho || '',
             cor: cor || '',
