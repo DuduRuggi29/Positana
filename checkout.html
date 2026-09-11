@@ -253,15 +253,6 @@
             border-radius: 10px; letter-spacing: 0.3px;
         }
 
-        /* ── PIX BOX ── */
-        .pix-info-box {
-            background: #fdf0f6; border: 1px solid #f0d0de; border-radius: 10px;
-            padding: 14px 16px; margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;
-        }
-        .pix-info-box i { color: var(--accent); font-size: 17px; margin-top: 1px; flex-shrink: 0; }
-        .pix-info-box strong { font-size: 14px; display: block; margin-bottom: 3px; color: var(--primary); }
-        .pix-info-box p { font-size: 13px; color: #7a2a4a; line-height: 1.5; }
-
         /* ── CARD FORM ── */
         #card-payment-form { display: none; }
         #card-form-status { font-size: 12px; margin: 8px 0; font-weight: 500; min-height: 18px; }
@@ -604,13 +595,6 @@
                 </div>
 
                 <div id="pix-info">
-                    <div class="pix-info-box">
-                        <i class="fas fa-tag"></i>
-                        <div>
-                            <strong>5% de desconto pagando com Pix!</strong>
-                            <p>O QR Code será gerado na próxima tela. Você terá 30 minutos para realizar o pagamento.</p>
-                        </div>
-                    </div>
                     <button class="btn-pay" onclick="payWithPix()">
                         <i class="fas fa-qrcode"></i>
                         <span>GERAR CÓDIGO PIX</span>
