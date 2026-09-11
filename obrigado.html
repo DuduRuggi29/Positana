@@ -107,6 +107,17 @@
         .pix2-processed-by { border-top: 1px dashed #ddd; margin-top: 18px; padding-top: 16px; text-align: center; }
         .pix2-processed-by span { font-size: 12px; color: #888; display: block; margin-bottom: 8px; }
         .pix2-processed-by img { height: 60px; }
+
+        #copied-toast {
+            position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(20px);
+            background: #1a1a1a; color: #fff; font-size: 14px; font-weight: 600;
+            padding: 12px 20px; border-radius: 50px; box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            display: flex; align-items: center; gap: 8px;
+            opacity: 0; pointer-events: none; transition: opacity 0.25s ease, transform 0.25s ease;
+            z-index: 999; white-space: nowrap;
+        }
+        #copied-toast i { color: #4ade80; }
+        #copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
@@ -272,8 +283,22 @@ function copyPix() {
             t.value = pixCode; document.body.appendChild(t); t.select();
             document.execCommand('copy'); document.body.removeChild(t);
         })
-        .then(() => alert('Código Pix copiado!'))
-        .catch(() => alert('Código Pix copiado!'));
+        .then(showCopiedToast)
+        .catch(showCopiedToast);
+}
+
+let toastTimer = null;
+function showCopiedToast() {
+    let toast = document.getElementById('copied-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'copied-toast';
+        toast.innerHTML = '<i class="fas fa-check-circle"></i> Código Pix copiado!';
+        document.body.appendChild(toast);
+    }
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
 }
 </script>
 </body>
