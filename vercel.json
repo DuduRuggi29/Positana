@@ -6,6 +6,7 @@
     { "source": "/obrigado", "destination": "/obrigado.html" },
     { "source": "/dashboard", "destination": "/dashboard.html" },
     { "source": "/calcinha", "destination": "/calcinha.html" },
-    { "source": "/checkout-calcinha", "destination": "/checkout-calcinha.html" }
+    { "source": "/checkout-calcinha", "destination": "/checkout-calcinha.html" },
+    { "source": "/super-promocao", "destination": "/super-promocao.html" }
   ]
 }
