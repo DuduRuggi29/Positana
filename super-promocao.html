@@ -130,7 +130,7 @@
 
             <div class="product-info">
                 <span class="product-meta-label">Novo &nbsp;·&nbsp; +2.400 Vendidos</span>
-                <h1 class="product-title">Sutiã Hanna 3.0 de Alta Sustentação Sem Aro [Pague 1 e Leve 3]</h1>
+                <h1 class="product-title">Sutiã Hanna 3.0 de Alta Sustentação Sem Aro [1 Sutiã por R$59,90]</h1>
                 
                 <div class="product-rating">
                     <div class="rating-avatars">
@@ -185,7 +185,7 @@
 
                     <div class="bundle-options">
 
-                        <!-- PROMO A: Pague 1, Leve 3 -->
+                        <!-- PROMO A: 1 Sutiã -->
                         <div class="bundle-card" id="promoA" onclick="selectPromo('A')">
                             <div class="bundle-radio">
                                 <input type="radio" name="bundle" id="bundleA" value="A">
@@ -193,27 +193,27 @@
                             </div>
                             <div class="bundle-info">
                                 <div class="bundle-header">
-                                    <span class="bundle-name">Pague 1 e Leve 3</span>
-                                    <span class="save-badge">67% OFF</span>
+                                    <span class="bundle-name">1 Sutiã</span>
+                                    <span class="save-badge">39% OFF</span>
                                 </div>
-                                <span class="bundle-desc">3 sutiãs Hanna 3.0 + <strong>Frete Grátis</strong></span>
+                                <span class="bundle-desc">1 sutiã Hanna 3.0 + <strong>Frete Grátis</strong></span>
                                 <div class="bundle-selections promo-selections" id="selectionsA" style="display:none;">
                                     <p class="selection-label">Quantos Kits?</p>
                                     <div class="kit-qty-row">
                                         <button class="kit-qty-btn" onclick="event.stopPropagation(); changeQty('A',-1)">−</button>
                                         <span class="kit-qty-val" id="qtyA">1</span>
                                         <button class="kit-qty-btn" onclick="event.stopPropagation(); changeQty('A',1)">+</button>
-                                        <span class="kit-qty-label" id="qtyLabelA">kit (3 sutiãs)</span>
+                                        <span class="kit-qty-label" id="qtyLabelA">1 unidade</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="bundle-price">
-                                <span class="current-price" id="priceA">R$98,90</span>
-                                <span class="old-price" id="oldA">R$296,70</span>
+                                <span class="current-price" id="priceA">R$59,90</span>
+                                <span class="old-price" id="oldA">R$98,90</span>
                             </div>
                         </div>
 
-                        <!-- PROMO B: Pague 2, Receba 4 (Mais Popular) -->
+                        <!-- PROMO B: Pague 2, Leve 4 (Mais Popular) -->
                         <div class="bundle-card active most-popular" id="promoB" onclick="selectPromo('B')">
                             <div class="popular-badge">Mais Popular</div>
                             <div class="bundle-radio">
@@ -222,8 +222,8 @@
                             </div>
                             <div class="bundle-info">
                                 <div class="bundle-header">
-                                    <span class="bundle-name">Pague 2 e Receba 4</span>
-                                    <span class="save-badge">50% OFF</span>
+                                    <span class="bundle-name">Pague 2 e Leve 4</span>
+                                    <span class="save-badge">70% OFF</span>
                                 </div>
                                 <span class="bundle-desc">4 sutiãs Hanna 3.0 + <strong>Frete Grátis</strong></span>
                                 <div class="bundle-selections promo-selections" id="selectionsB" style="display:block;">
@@ -237,7 +237,7 @@
                                 </div>
                             </div>
                             <div class="bundle-price">
-                                <span class="current-price" id="priceB">R$127,90</span>
+                                <span class="current-price" id="priceB">R$117,00</span>
                                 <span class="old-price" id="oldB">R$395,60</span>
                             </div>
                         </div>
@@ -823,9 +823,9 @@
     <!-- INTERACTIVITY & ANIMATIONS -->
     <script src="scripts.js"></script>
     <script>
-        const PROMO_PRICES   = { A: 98.90,  B: 127.90 };
-        const PROMO_OLD      = { A: 296.70, B: 395.60 };
-        const PROMO_UNITS    = { A: 3,      B: 4 };
+        const PROMO_PRICES   = { A: 59.90,  B: 117.00 };
+        const PROMO_OLD      = { A: 98.90,  B: 395.60 };
+        const PROMO_UNITS    = { A: 1,      B: 4 };
         const qtyState       = { A: 1, B: 1 };
 
         function fmtBRL(v) { return 'R$' + v.toFixed(2).replace('.', ','); }
