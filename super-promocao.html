@@ -39,12 +39,22 @@
     <!-- TikTok Pixel Code End -->
     <script>
     (function addScript() {
-        var script = document.createElement('script');
-        script.src = "https://planweb.app/scripts/dist/stories-videos.js?licenseId=20362";
-        script.type = "text/javascript";
-        script.async = true;
-        script.charset = "UTF-8";
-        document.head.appendChild(script);
+        function load() {
+            var script = document.createElement('script');
+            script.src = "https://planweb.app/scripts/dist/stories-videos.js?licenseId=20362";
+            script.type = "text/javascript";
+            script.async = true;
+            script.charset = "UTF-8";
+            document.head.appendChild(script);
+        }
+        // Carrega o widget de stories só depois que o resto da página já
+        // carregou, pra não competir por banda com o conteúdo principal
+        // (o widget puxa vídeo/imagem próprios assim que o script roda).
+        if (document.readyState === 'complete') {
+            setTimeout(load, 1000);
+        } else {
+            window.addEventListener('load', function () { setTimeout(load, 1000); });
+        }
     })();
     </script>
 </head>
