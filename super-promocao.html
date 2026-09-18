@@ -147,11 +147,10 @@
 
                 <div class="product-price-container">
                     <div class="option-group">
-                        <label class="option-label" id="colorLabel">Cor: <strong>Preto</strong></label>
+                        <label class="option-label" id="colorLabel">Cor: <strong>Cores Variadas</strong></label>
                         <p style="font-size:11px; color:#999; margin: -4px 0 6px; font-style:italic;">As cores podem variar</p>
                         <div class="color-swatches">
-                            <div class="swatch active" style="background:#000000" onclick="selectColor(this, 'Preto')"></div>
-                            <div class="swatch" style="background:#C19A6B" onclick="selectColor(this, 'Marrom Claro')"></div>
+                            <div class="swatch active" style="background-image:url('https://cdn.shopify.com/s/files/1/0798/1537/7113/files/CAPA_SUTIA.png?v=1770817322&width=160'); background-size:cover; background-position:center;" onclick="selectColor(this, 'Cores Variadas')" title="Cores Variadas"></div>
                         </div>
                         <p style="font-size:11px; color:#999; margin: 6px 0 0; font-style:italic;">(Mais de uma unidade as cores são variadas)</p>
                     </div>
@@ -823,6 +822,11 @@
     <!-- INTERACTIVITY & ANIMATIONS -->
     <script src="scripts.js"></script>
     <script>
+        // Esta página só tem a opção "Cores Variadas" (sem swatches de cor
+        // pra escolher), então o valor selecionado já começa correto,
+        // sem depender do default 'Preto' do scripts.js compartilhado.
+        selectedColor = 'Cores Variadas';
+
         const PROMO_PRICES   = { A: 59.90,  B: 117.00 };
         const PROMO_OLD      = { A: 98.90,  B: 395.60 };
         const PROMO_UNITS    = { A: 1,      B: 4 };
