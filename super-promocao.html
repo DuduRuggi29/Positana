@@ -961,8 +961,10 @@
                 notif.style.transform = 'translateY(16px)';
             }, 4500);
         }
-        setTimeout(showNotif, 3000);
-        setInterval(showNotif, 18000);
+        // Mostra só 2 notificações: a 1ª aos 2s de página, a 2ª 5s depois
+        // da 1ª aparecer (ou seja, aos 7s) - e nunca mais depois disso.
+        setTimeout(showNotif, 2000);
+        setTimeout(showNotif, 7000);
     })();
 </script>
 </body>
