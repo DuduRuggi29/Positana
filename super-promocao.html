@@ -182,34 +182,6 @@
 
                     <div class="bundle-options">
 
-                        <!-- PROMO A: 1 Sutiã -->
-                        <div class="bundle-card" id="promoA" onclick="selectPromo('A')">
-                            <div class="bundle-radio">
-                                <input type="radio" name="bundle" id="bundleA" value="A">
-                                <label for="bundleA"></label>
-                            </div>
-                            <div class="bundle-info">
-                                <div class="bundle-header">
-                                    <span class="bundle-name">1 Sutiã</span>
-                                    <span class="save-badge">39% OFF</span>
-                                </div>
-                                <span class="bundle-desc">1 sutiã Hanna 3.0 + <strong>Frete Grátis</strong></span>
-                                <div class="bundle-selections promo-selections" id="selectionsA" style="display:none;">
-                                    <p class="selection-label">Quantos Kits?</p>
-                                    <div class="kit-qty-row">
-                                        <button class="kit-qty-btn" onclick="event.stopPropagation(); changeQty('A',-1)">−</button>
-                                        <span class="kit-qty-val" id="qtyA">1</span>
-                                        <button class="kit-qty-btn" onclick="event.stopPropagation(); changeQty('A',1)">+</button>
-                                        <span class="kit-qty-label" id="qtyLabelA">1 unidade</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bundle-price">
-                                <span class="current-price" id="priceA">R$59,90</span>
-                                <span class="old-price" id="oldA">R$98,90</span>
-                            </div>
-                        </div>
-
                         <!-- PROMO B: Pague 2, Leve 4 (Mais Popular) -->
                         <div class="bundle-card active most-popular" id="promoB" onclick="selectPromo('B')">
                             <div class="popular-badge">Mais Popular</div>
@@ -220,7 +192,7 @@
                             <div class="bundle-info">
                                 <div class="bundle-header">
                                     <span class="bundle-name">Pague 2 e Leve 4</span>
-                                    <span class="save-badge">70% OFF</span>
+                                    <span class="save-badge">73% OFF</span>
                                 </div>
                                 <span class="bundle-desc">4 sutiãs Hanna 3.0 + <strong>Frete Grátis</strong></span>
                                 <div class="bundle-selections promo-selections" id="selectionsB" style="display:block;">
@@ -234,7 +206,7 @@
                                 </div>
                             </div>
                             <div class="bundle-price">
-                                <span class="current-price" id="priceB">R$117,00</span>
+                                <span class="current-price" id="priceB">R$107,90</span>
                                 <span class="old-price" id="oldB">R$395,60</span>
                             </div>
                         </div>
@@ -825,10 +797,10 @@
         // sem depender do default 'Preto' do scripts.js compartilhado.
         selectedColor = 'Cores Variadas';
 
-        const PROMO_PRICES   = { A: 59.90,  B: 117.00 };
-        const PROMO_OLD      = { A: 98.90,  B: 395.60 };
-        const PROMO_UNITS    = { A: 1,      B: 4 };
-        const qtyState       = { A: 1, B: 1 };
+        const PROMO_PRICES   = { B: 107.90 };
+        const PROMO_OLD      = { B: 395.60 };
+        const PROMO_UNITS    = { B: 4 };
+        const qtyState       = { B: 1 };
 
         function fmtBRL(v) { return 'R$' + v.toFixed(2).replace('.', ','); }
 
@@ -850,7 +822,7 @@
         }
 
         function selectPromo(promo) {
-            ['A','B'].forEach(p => {
+            ['B'].forEach(p => {
                 document.getElementById('promo' + p).classList.remove('active');
                 document.getElementById('bundle' + p).checked = false;
                 document.getElementById('selections' + p).style.display = 'none';
