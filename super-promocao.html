@@ -239,13 +239,13 @@
     <section class="floating-videos-section">
         <div class="floating-videos-grid">
             <div class="floating-video-card float-1">
-                <video data-src="sutiabra.mp4" muted loop playsinline preload="none"></video>
+                <video data-early-src="sutiabra.mp4" muted loop playsinline preload="auto"></video>
             </div>
             <div class="floating-video-card float-2">
-                <video data-src="brasutiadois.mp4" muted loop playsinline preload="none"></video>
+                <video data-early-src="brasutiadois.mp4" muted loop playsinline preload="auto"></video>
             </div>
             <div class="floating-video-card float-3">
-                <video data-src="brasutiatres.mp4" muted loop playsinline preload="none"></video>
+                <video data-early-src="brasutiatres.mp4" muted loop playsinline preload="auto"></video>
             </div>
         </div>
     </section>
@@ -806,6 +806,20 @@
         // pra escolher), então o valor selecionado já começa correto,
         // sem depender do default 'Preto' do scripts.js compartilhado.
         selectedColor = 'Cores Variadas';
+
+        // Vídeos flutuantes: começam a carregar assim que a página termina de
+        // carregar (sem esperar o scroll), pra já estarem prontos quando o
+        // cliente descer até eles.
+        function startFloatingVideos() {
+            document.querySelectorAll('video[data-early-src]').forEach(function (v) {
+                v.src = v.getAttribute('data-early-src');
+                v.removeAttribute('data-early-src');
+                v.load();
+                v.play().catch(function () {});
+            });
+        }
+        if (document.readyState === 'complete') { startFloatingVideos(); }
+        else { window.addEventListener('load', startFloatingVideos); }
 
         const PROMO_PRICES   = { B: 107.90 };
         const PROMO_OLD      = { B: 395.60 };
