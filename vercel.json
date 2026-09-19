@@ -1,13 +1,51 @@
 {
   "framework": null,
   "rewrites": [
-    { "source": "/checkout", "destination": "/checkout.html" },
-    { "source": "/success", "destination": "/success.html" },
-    { "source": "/obrigado", "destination": "/obrigado.html" },
-    { "source": "/dashboard", "destination": "/dashboard.html" },
-    { "source": "/calcinha", "destination": "/calcinha.html" },
-    { "source": "/checkout-calcinha", "destination": "/checkout-calcinha.html" },
-    { "source": "/super-promocao", "destination": "/super-promocao.html" },
-    { "source": "/checkout-super-promocao", "destination": "/checkout-super-promocao.html" }
+    {
+      "source": "/checkout",
+      "destination": "/checkout.html"
+    },
+    {
+      "source": "/success",
+      "destination": "/success.html"
+    },
+    {
+      "source": "/obrigado",
+      "destination": "/obrigado.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard.html"
+    },
+    {
+      "source": "/super-promocao",
+      "destination": "/super-promocao.html"
+    },
+    {
+      "source": "/checkout-super-promocao",
+      "destination": "/checkout-super-promocao.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/calcinha",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/calcinha.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/checkout-calcinha",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/checkout-calcinha.html",
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }
