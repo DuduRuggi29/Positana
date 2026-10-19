@@ -22,6 +22,14 @@
       "destination": "/sutia.html"
     },
     {
+      "source": "/calca",
+      "destination": "/calca-cruzada.html"
+    },
+    {
+      "source": "/checkout-calca",
+      "destination": "/checkout-calca.html"
+    },
+    {
       "source": "/super-promocao",
       "destination": "/super-promocao.html"
     },

@@ -28,13 +28,16 @@ async function sendWhatsAppConfirmation(order) {
     try {
         const { nome, telefone, kit } = order || {};
         if (!ZAPI_INSTANCE_ID || !ZAPI_TOKEN || !telefone) return;
-        if (kit && String(kit).startsWith('CALC')) return; // calcinha fica de fora - mensagem oferece o kit de calcinha
+        const isCalca = kit && String(kit).startsWith('CALCA');
+        if (kit && String(kit).startsWith('CALC') && !isCalca) return; // calcinha fica de fora - mensagem oferece o kit de calcinha
 
         let phone = String(telefone).replace(/\D/g, '');
         if (!phone.startsWith('55')) phone = '55' + phone;
 
         const primeiroNome = (nome || '').trim().split(' ')[0] || 'cliente';
-        const message = `Olá ${primeiroNome}, seu pedido foi confirmado com sucesso e logo será processado e sairá para entrega. Prazo de entrega é de 14 dias.\n\nPara mais dúvidas chame o suporte pelo número: 21 97560-5337\n\nE como você é nossa cliente que comprou nessa super promoção, estamos oferecendo para você, ${primeiroNome}, o kit de 10 calcinhas 100% algodão recomendadas por ginecologistas por menos de R$100 reais, aproveite agora por esse link: https://www.juliajuliesutia.com.br/calcinha#`;
+        const message = isCalca
+            ? `Olá ${primeiroNome}, seu pedido da Calça Cintura Alta Cruzada foi confirmado com sucesso e logo será processado e sairá para entrega. Prazo de entrega é de 14 dias.\n\nPara mais dúvidas chame o suporte pelo número: 21 97560-5337`
+            : `Olá ${primeiroNome}, seu pedido foi confirmado com sucesso e logo será processado e sairá para entrega. Prazo de entrega é de 14 dias.\n\nPara mais dúvidas chame o suporte pelo número: 21 97560-5337\n\nE como você é nossa cliente que comprou nessa super promoção, estamos oferecendo para você, ${primeiroNome}, o kit de 10 calcinhas 100% algodão recomendadas por ginecologistas por menos de R$100 reais, aproveite agora por esse link: https://www.juliajuliesutia.com.br/calcinha#`;
 
         const zapiRes = await fetch(`https://api.z-api.io/instances/${ZAPI_INSTANCE_ID}/token/${ZAPI_TOKEN}/send-text`, {
             method: 'POST',
@@ -157,7 +160,7 @@ async function getOrCreateBlingContato(order, accessToken) {
 async function emitBlingNfe(order) {
     try {
         if (!BLING_CLIENT_ID || !BLING_CLIENT_SECRET) return;
-        if (!order.kit || String(order.kit).startsWith('CALC')) return; // calcinha fica de fora, só sutiã
+        if (!order.kit || String(order.kit).startsWith('CALC')) return; // calcinha e calça (kit CALCA) ficam de fora, só sutiã
 
         const tamanhoPrefixo = String(order.tamanho || '').split(' ')[0].toUpperCase();
         const produto = BLING_PRODUTO_POR_TAMANHO[tamanhoPrefixo];

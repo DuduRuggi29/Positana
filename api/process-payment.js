@@ -22,6 +22,13 @@ const PRODUCTS = {
         description: 'Calcinha 95% algodão + 5% elastano, tecido antiodor, vendida em kit com múltiplas unidades',
         category_id: 'fashion',
         picture_path: '/cal1.jpg'
+    },
+    'calca-cruzada': {
+        sku: 'CALCA-CINTURA-ALTA-CRUZADA',
+        title: 'Calça Feminina Cintura Alta Cruzada',
+        description: 'Calça flare de cintura alta com cós cruzado, tecido em poliéster e elastano',
+        category_id: 'fashion',
+        picture_path: '/calca_imgs/claro-1.jpg'
     }
 };
 

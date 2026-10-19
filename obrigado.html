@@ -194,8 +194,9 @@ if (type === 'pix' && status === 'pending') {
         if (!localStorage.getItem(pixKey)) {
             localStorage.setItem(pixKey, '1');
             const orderTotal = parseFloat(params.get('total') || '0');
+            const contentId = params.get('produto') || 'sutia-hanna-30';
             if (typeof fbq !== 'undefined') {
-                fbq('track', 'Purchase', { value: orderTotal, currency: 'BRL', num_items: 1, content_ids: ['sutia-hanna-30'], content_type: 'product' });
+                fbq('track', 'Purchase', { value: orderTotal, currency: 'BRL', num_items: 1, content_ids: [contentId], content_type: 'product' });
                 fbq('trackCustom', 'PurchaseNewClient', { value: orderTotal, currency: 'BRL' });
                 fbq('trackCustom', 'PurchasePix', { value: orderTotal, currency: 'BRL' });
             }
@@ -210,7 +211,7 @@ if (type === 'pix' && status === 'pending') {
             if (typeof ttq !== 'undefined') {
                 ttq.track('CompletePayment', {
                     content_type: 'product',
-                    content_id: 'sutia-hanna-30',
+                    content_id: contentId,
                     value: orderTotal,
                     currency: 'BRL'
                 });
