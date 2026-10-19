@@ -18,6 +18,10 @@
       "destination": "/dashboard.html"
     },
     {
+      "source": "/sutia",
+      "destination": "/sutia.html"
+    },
+    {
       "source": "/super-promocao",
       "destination": "/super-promocao.html"
     },
@@ -29,22 +33,22 @@
   "redirects": [
     {
       "source": "/calcinha",
-      "destination": "/",
+      "destination": "/sutia",
       "permanent": false
     },
     {
       "source": "/calcinha.html",
-      "destination": "/",
+      "destination": "/sutia",
       "permanent": false
     },
     {
       "source": "/checkout-calcinha",
-      "destination": "/",
+      "destination": "/sutia",
       "permanent": false
     },
     {
       "source": "/checkout-calcinha.html",
-      "destination": "/",
+      "destination": "/sutia",
       "permanent": false
     }
   ]
